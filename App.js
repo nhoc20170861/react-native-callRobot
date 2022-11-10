@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import {
   StyleSheet,
@@ -15,15 +15,16 @@ import {
   Button,
   TextInput,
   ToastAndroid,
+  SafeAreaView,
 } from 'react-native';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {NavigationContainer} from '@react-navigation/native';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import HomeScreen from './components/Screens/HomeScreen';
 import SettingsScreen from './components/Screens/SettingsScreen';
-import Login from './components/Screens/Login';
+import LoginScreen from './components/Screens/LoginScreen';
 // Reactnavigation Bottom Tab
 const Tab = createMaterialBottomTabNavigator();
 function MyTabs() {
@@ -40,8 +41,8 @@ function MyTabs() {
         display: 'flex',
         justifyContent: 'center',
       }}
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused, size, color}) => {
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, size, color }) => {
           let iconName;
           if (route.name === 'Home') {
             iconName = 'home';
@@ -55,7 +56,7 @@ function MyTabs() {
           return <FontAwesome5 name={iconName} size={size} color={color} />;
         },
       })}>
-      <Tab.Screen name="Login" component={Login} />
+      <Tab.Screen name="Login" component={LoginScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
@@ -64,9 +65,11 @@ function MyTabs() {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+    <SafeAreaView style={{ backgroundColor: '#f9fbfc', flex: 1 }}>
+      <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
+    </SafeAreaView>
   );
 };
 
